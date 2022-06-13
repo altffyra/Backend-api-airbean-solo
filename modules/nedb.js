@@ -9,6 +9,21 @@ const result = menuDatabase.find({})
 return result
 }
 
+function duplicationCheck(item){
+    const result = menuDatabase.find({ $or: [ {id: item.id}, {title: item.title} ]})
+    return result
+}
+
+function addProduct(item){
+    const result = menuDatabase.insert(item)
+    return result
+}
+
+function deleteProduct(item){
+    const result = menuDatabase.remove({ $and: [ {id: item.id}, {title: item.title}, {price: item.price}  ]})
+    return result
+}
+
 function checkAccount(credentials){
     const result = userDatabase.find({ $or: [ {email: credentials.email}, {username: credentials.username} ] })
     return result
@@ -42,4 +57,4 @@ function createOrder(credentials){
     return result
 }
 
-module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders}
+module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders, duplicationCheck, addProduct, deleteProduct}

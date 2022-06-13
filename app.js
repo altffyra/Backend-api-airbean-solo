@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-// const {authApi, authenticate} = require('./modules/apikeys')
-// const {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders} = require('./modules/nedb')
 const PORT = 8000
 app.use(express.json())
 const accountRoute = require('./routes/account')
