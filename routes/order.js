@@ -71,10 +71,4 @@ const singleOrderCart = singleOrder.order;
 }
 
 
-
-
-
-
-
-
 module.exports= orderRoute

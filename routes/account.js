@@ -37,7 +37,7 @@ accountRoute.post('/login', async (request, response)=> {
             resObj.message = "Account successfully logged in!";
         } else  resObj.message = "Wrong username/password";
     } else {
-        resObj.message = "No credentials BIFOGAT";
+        resObj.message = "No credentials attached";
     }
     response.json(resObj);
 })
