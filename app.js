@@ -1,8 +1,30 @@
 const express = require('express');
 const app = express();
+const {authApi, authenticate} = require('./modules/apikeys')
 const {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders} = require('./modules/nedb')
 const PORT = 8000
 app.use(express.json())
+
+
+// routes.!
+
+
+app.post('/api/menu', authenticate, async (request, response)=> {
+    const newProduct = request.body
+    const resObj = {}
+    if (newProduct.hasOwnProperty('id') 
+    && newProduct.hasOwnProperty('title') && 
+    newProduct.hasOwnProperty('desc') &&
+    newProduct.hasOwnProperty('price')) {
+        response.json('added!')
+
+    }else response.json("invalid product, product needs 'id', 'title', 'desc' and 'price'")
+    // const menuResults = await menuResult();
+    // const resObj = {menu: menuResults};
+    // response.json(resObj);
+    })
+
+
 
 
 
@@ -61,7 +83,7 @@ app.get('/api/order/:id', async (request, response)=> {
 })
 
 function checkIfDone(singleOrder) {
-    const rightNow = new Date().toLocaleString()
+    const rightNow = new Date().toLocaleTimeString()
     singleOrder.totalPrice = 0;
     if (singleOrder.ETA > rightNow ) {
      singleOrder.done = "done";
@@ -85,7 +107,6 @@ app.get('/api/menu', async (request, response)=> {
 
 
 // /api/account/signup	POST	Skapar ett användarkonto
-
 //   UTFORMNING AV SIGNUP FRONTEND  {"email" : "", "username": "", "password": ""}
 app.post('/api/account/signup', async (request, response)=> {
     const credentials = request.body
@@ -107,10 +128,7 @@ app.post('/api/account/signup', async (request, response)=> {
 
 
 // /api/account/login	POST	Logga in
-
 //   UTFORMNING AV LOGIN FRONTEND  {"username": "", "password": ""}
-
-
 app.post('/api/account/login', async (request, response)=> {
     const credentials = request.body;
     const resObj = {};
