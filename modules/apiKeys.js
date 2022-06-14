@@ -9,7 +9,7 @@ async function authenticate(request, response, next) {
     next();
   } else {
     resObj.message = "Access denied!";
-    response.json(resObj)
+    response.json(resObj);
   }
 }
 
