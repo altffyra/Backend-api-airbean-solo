@@ -4,7 +4,7 @@ const keyDatabase = new nedb({ filename: "keysDatabase.db", autoload: true });
 async function authenticate(request, response, next) {
   const apiKeyAuth = request.headers.apikeyauth;
   const result = await authApi(apiKeyAuth);
-  const resObj = {}
+  const resObj = {};
   if (result.length > 0) {
     next();
   } else {
